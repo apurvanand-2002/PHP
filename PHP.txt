@@ -1,0 +1,210 @@
+WEB SERVER executes PHP file received unlike HTML, CSS file where server just throws whatever it receives. Hence, when we see page source of a PHP file ,we see output and not the code as 
+web server has already executed the php file.
+
+A php file can store and execute HTML, but an HTML can not store PHP. hence, we must save our files in php so, as to access  html and php.
+
+<-----FOR EACH LOOP IN PHP------>         //for each loop are specially used for printing arrays
+
+// NUMERIC INDEXED ARRAYS
+<?php
+$a=array("Pankaj","Rinku","Akshay");
+$a[2]="Apurv";
+$a[3]="Akshay";
+foreach($a as $i){
+    echo $i," ";
+}
+?>
+
+//ASSOCIATIVE ARRAYS
+
+<?php
+$a=array("Apurv"=>1,"Barak"=>2,"Obama"=>3,"Neena"=>4);
+foreach($a as $p=>$q){
+    echo $p ." is ".$q."<br>";  //<br> is used to break line
+}
+
+// echo $a["Apurv"]," ";
+// echo $a["Obama"]," ";
+?>
+
+<-----MULTIDIMENSIONAL ARRAY----->
+<?php
+$students=array(
+    "Apurv"=>array(
+        "Physics"=>49,
+        "Chemistry"=>45,
+        "Mathematics"=>45,
+    ),
+    "XYZ"=>array(
+        "Physics"=>45,
+        "Chemistry"=>44,
+        "Mathematics"=>44
+    )
+    );
+foreach ($students as $name=>$subjects){
+    foreach($subjects as $subject=>$marks){
+        echo $name ." has achieved ".$marks ." in ".$subject."<br>";
+    }
+}
+
+<----backslash(\)----->
+Can be used to give special meaning to any ordinary alphabet and can also be used to remove spaecial meaning from any special alphabet.
+
+<----GLOBAL VARIABLE------>
+GLOBAL VARIABLE behaves differently in PHP than other programming languages due to different scopes.BUT they can be made global using 'global' keyword.
+
+<?php
+$abc="HELLO WORLD!";
+function a(){
+     global $abc;
+    echo $abc,"<br>";
+}
+function b(){                                                                   OUTPUT: HELLO WORLD!
+    global $abc;                                                                        APURV ANAND
+     $abc="APURV ANAND";                                                                APURV ANAND
+    echo $abc,"<br>";
+}
+a();
+b();
+echo $abc;
+
+//When we use 'global' keyword, even the global variable declared previously will change and hence, all further changes will be seen.
+?> 
+
+
+
+
+///   $GLOBALS keyword can also be used.
+<?php
+$abc="HELLO WORLD!";
+function a(){
+    global $abc;
+    echo $abc,"<br>";
+}
+function b(){
+    global $abc;
+    $GLOBALS['abc']= "APURV ANAND";
+    echo $GLOBALS['abc'],"<br>";
+}
+a();
+b();
+echo $abc;
+?>
+
+<----------CALL BY REFERENCE----->
+USE OF AMBERSAND.
+
+<?php
+function inc(&$a){      //USE OF AMBERSAND.
+    $a++;
+    return $a;
+}
+$c=12;
+inc($c);
+echo $c;
+?>
+
+\\
+A super-global variable is a avariable that is available in all scopes whether outside or inside of a function.Like $GLOBALS associative array.
+
+
+//Example of form submission using PHP
+
+<form method = "post" action = "submit.php">
+    <input type="text" name="email"/>
+    <input type="password" name="password"/> <br/>
+ 
+    <input type="radio" name="gender" value="male"/> Male
+    <input type="radio" name="gender" value="female"/> Female
+    <input type="radio" name="gender" value="other"/> Other <br/>
+ 
+    <input type="checkbox" name="interest" value="cricket"/> Cricket
+    <input type="checkbox" name="interest" value="football"/> Football <br/>
+    <input type="checkbox" name="interest" value="basketball"/> Basketball <br/>
+    <input type="checkbox" name="interest" value="chess"/> Chess <br/>
+ 
+    <select name="city">
+        <option value="Kolkata"> Kolkata </option>
+        <option value="Delhi"> Delhi </option>
+        <option value="Mumbai"> Mumbai </option>
+        <option value="Bangalore"> Bangalore </option>
+        <option value="Outstation"> Outstation</option>
+    </select> <br/>
+ 
+    <textarea name="address" rows="6" cols="50">
+        Write your address...
+    </textarea> <br/>
+ 
+    <input type="submit" name="submit" value="Submit"/>    
+</form>
+
+// useful codes for form submission:
+
+//[Code for register_form.php]
+<html>
+    <head>
+        <title>Registration Form</title>
+    </head>
+    <body>
+        <h1>Registration</h1>
+        <form method="post" action="register_submit.php">
+            Name: <input type="text" name="name"/><br/><br/>
+            Email: <input type="text" name="email"/><br/><br/>
+            Password: <input type="password" name="password"/><br/><br/>
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </body>
+</html>
+
+
+//[Code for register_submit.php]
+<?php
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    echo $name . "<br/>";
+    echo $email . "<br/>";
+    echo $password . "<br/>";
+?>
+
+
+//[Code for login_form.php]
+<html>
+    <head>
+        <title>Login Form</title>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form method="post" action="login_submit.php">
+            Email: <input type="text" name="email"/><br/><br/>
+            Password: <input type="password" name="password"/><br/><br/>
+            <input type="submit" name="submit" value="Submit">
+        </form>
+    </body>
+</html>
+
+
+//[Code for login_submit.php]
+<?php
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    echo $email . "<br/>";
+    echo $password . "<br/>";
+?>
+
+
+<----
+form has two terms within it method and action. Action defines the php file in which submission is to be done whereas method will be of default type GET and we can set it to be either of
+GET or POST type. Difference in these GET and POST types is:
+In GET, the data entered by user in form in new url will be visible. It is used in Google , youtube and amazon searches as then only one would be able to send links to others for a
+particular thing or item else, always one would land on homepage. So, GET is used to retrieve information.
+In POST, the data enetered by user in the form will not be visible. So, POST is used to send information.
+
+Data entered using GET and POST methods will be accesssed using $_GET and $_POST superglobal associative arrays respectively.
+
+
+<------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------>
+DATABASE RELATED FUNCTIONS OF PHP (BUILT_IN):
+------>
